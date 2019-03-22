@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width = device-width, initial-scale = 1">
+      <title>WEO 3D</title>
+      <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/lux/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/css/bootstrap-slider.css">
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.css">
+      <link rel="stylesheet" type="text/css" href="Cesium/Build/Cesium/Widgets/widgets.css">
+      <link rel="stylesheet" type="text/css" href="css/weo3d.css">
+   </head>
+   <body>
+      <div class="container-fluid">
+         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="navbar-header">
+               <a class="navbar-brand" href="#">WEO 3D Visualization</a>
+            </div>
+            <button class="btn btn-secondary navbar-btn" id="submit-selection">apply</button>
+            <ul class="nav navbar-nav ml-auto">
+               <li class="dropdown">
+                  <button class="btn btn-secondary navbar-btn dropdown-toggle" type="button" data-toggle="dropdown">
+                  Visualization
+                  <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                     <li class="dropdown-item"><a href="#" id="select-earth"><b>3D-Earth</b></a></li>
+                     <li class="dropdown-divider"></li>
+                     <li class="dropdown-item"><a href="#" id="select-cube"><b>3D-Cube</b></a></li>
+                  </ul>
+               </li>
+            </ul>
+         </nav>
+         <br>
+         <div class="row container-fluid">
+            <div class="col-3" id="menu">
+               <ul class="list-group pre-scrollable" id="subject-menu">
+                  {% for name, categories in subjects %}
+                  <li class="list-group-item">
+                     <a href="#subject-{{ loop.index }}" data-toggle="collapse">{{ name }}</a>
+                     <div class="collapse" id="subject-{{ loop.index }}">
+                        <br>
+                        {% for category in categories %}
+                        <div><label><input type="checkbox" value="{{ category.id }}"> {{ category.desc }}</label></div>
+                        {% endfor %}
+                     </div>
+                  </li>
+                  {% endfor %}
+               </ul>
+               <br>
+               <div class="list-group" id="country-menu">
+                  <div class="list-group-item">
+                     <button class="btn btn-primary" id="select-all-countries">select all</button>
+                  </div>
+                  <div class="list-group-item pre-scrollable" id="country-checkbox-list">
+                     {% for country in longlat %}
+                     <div><label><input type="checkbox" value="{{ country.Name }}"> {{ country.Name }}</label></div>
+                     {% endfor %}
+                  </div>
+               </div>
+            </div>
+            <div class="col-9 jumbotron">
+               <div class="container" id="earth-container"></div>
+               <div class="container" id="cube-container"></div>
+               <br><br>
+               <div class="list-group">
+                  <div class="list-group-item" id="year-menu">
+                     <div id = 'div-year-menu-text'>
+                        <p id="year-menu-text"><strong>Year</strong></p>
+                     </div>
+                     <div id = 'div-year-menu-button'><input id ='year-menu-button' type =
+                        "image" src ="img/play_button.jpg" width=30px height=30px></div>
+                     <div id="year-menu-slider"></div>
+                  </div>
+               </div>
+               <table class="table table-dark table-striped table-sm" id="dim-to-subject">
+                  <thead>
+                     <tr>
+                        <th >dimension:</th>
+                        <th scope="col" data-field="x">x-axis</th>
+                        <th scope="col" data-field="y">y-axis</th>
+                        <th scope="col" data-field="z">z-axis</th>
+                        <th scope="col" data-field="c">color</th>
+                        <th scope="col" data-field="r">radius</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <th scope="row" id="weo-values">WEO code:</th>
+                        <td data-toggle="tooltip" title="">not selected</td>
+                        <td data-toggle="tooltip" title="">not selected</td>
+                        <td data-toggle="tooltip" title="">not selected</td>
+                        <td data-toggle="tooltip" title="">not selected</td>
+                        <td data-toggle="tooltip" title="">not selected</td>
+                     </tr>
+                  </tbody>
+               </table>
+               <table class="table table-dark table-sm" id="color-info">
+                  <tbody>
+                     <tr>
+                        <th scope="row" id="color-values">color info:</th>
+                        <td>minimum: not selected</td>
+                        <td>
+                           <canvas id="color-gradient" width="200" height="20" style="border: 1px solid #d3d3d3;"></canvas>
+                        </td>
+                        <td>maximum: not selected</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/bootstrap-slider.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.js"></script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+      <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+      <script src="https://code.highcharts.com/modules/exporting.js"></script>
+      <script src="https://code.highcharts.com/modules/export-data.js"></script>
+      <script src="Cesium/Build/Cesium/Cesium.js"></script>
+      <script src="js/weo3d.js"></script>
+   </body>
+</html>

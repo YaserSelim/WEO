@@ -1,0 +1,102 @@
+﻿{
+  "Balance of Payment": [
+    {
+      "id": "BCA_NGDPD",
+      "desc": "Current account balance (% of GDP)"
+    },
+    {
+      "id":  "BCA",
+      "desc": "Current account balance (US$)"
+    }
+  ],
+  "Government Finance": [
+    {
+      "id": "GGXWDG_NGDP",
+      "desc": "General government gross debt (% of GDP)"
+    },
+    {
+      "id": "GGXWDN_NGDP",
+      "desc": "General government net debt (% of GDP)"
+    },
+    {
+      "id": "GGXCNL_NGDP",
+      "desc": "General government net lending/borrowing (% of GDP)"
+    },
+    {
+      "id": "GGXONLB_NGDP",
+      "desc": "General government primary net lending/borrowing (% of GDP)"
+    },
+    {
+      "id": "GGR_NGDP",
+      "desc": "General government revenue (% of GDP)"
+    },
+    {
+      "id": "GGX_NGDP",
+      "desc": "General government total expenditure (% of GDP)"
+    }
+  ],
+  "Monetary": [
+    {
+      "id": "PCPIPCH",
+      "desc": "Inflation, average consumer prices (%)"
+    },
+    {
+      "id": "PCPIEPCH",
+      "desc": "Inflation, end of period consumer prices (%)"
+    }
+  ],
+  "National Account": [
+    {
+      "id": "PPPSH",
+      "desc": "GDP based on PPP (%)"
+    },
+    {
+      "id": "NGDPDPC",
+      "desc": "GDP per capita, current prices (US$)"
+    },
+    {
+      "id": "NGDP_RPCH",
+      "desc": "GDP, constant prices (% change)"
+    },
+    {
+      "id": "NGDPD",
+      "desc": "GDP, current prices (US$)"
+    },
+    {
+      "id": "NGSD_NGDP",
+      "desc": "Gross national saving (% of GDP)"
+    },
+    {
+      "id": "NID_NGDP",
+      "desc": "Investment (% of GDP)"
+    }
+  ],
+  "People": [
+    {
+      "id": "LP",
+      "desc": "Population"
+    },
+    {
+      "id": "LUR",
+      "desc": "Unemployment rate (%)"
+    }
+  ],
+  "Trade": [
+    {
+      "id": "TXG_RPCH",
+      "desc": "Export volume of goods (% change)"
+    },
+    {
+      "id": "TX_RPCH",
+      "desc": "Export volume of goods and services (% change)"
+    },
+    {
+      "id": "TMG_RPCH",
+      "desc": "Import volume of goods (% change)"
+    },
+    {
+      "id": "TM_RPCH",
+      "desc": "Import volume of goods and services (% change)"
+    }
+  ]
+}

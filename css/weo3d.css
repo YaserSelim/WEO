@@ -1,0 +1,47 @@
+﻿.dropdown-menu {
+left:0;
+top:0;
+position:absolute;
+transform:translate3d(0px,37px,0px);
+}
+
+#year-menu: after {
+width:100%;
+border:1px solid #919aa1;
+background:#fff;
+display:inline-block;
+clear:both;
+float:none;
+}
+
+#year-menu div {
+float:left;
+word-break:break-all;
+}
+
+#div-year-menu-text {
+width:6%;
+color:#000;
+}
+
+#div-year-menu-button {
+width:6%;
+}
+
+.slider.slider-horizontal {
+width:88%;
+margin:auto;
+}
+
+.slider-handle {
+width:25px;
+height:25px;
+border-radius:50%;
+background:#000;
+cursor:pointer;
+touch-action: none;
+}
+
+.slider.slider-horizontal .tooltip.tooltip-main.in {
+opacity:1!important;
+}
